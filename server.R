@@ -1,5 +1,6 @@
 # Initialize Server Code
 library(shiny)
+source("BlackScholes.R")
 
 
 # Server Function
