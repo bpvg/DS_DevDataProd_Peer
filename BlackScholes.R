@@ -81,14 +81,3 @@ Put <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                        row.names = "PUT")
     return(r)
 }
-
-
-
-Calculator <- function(Spot, Strike, Maturity, Vol, Rate, DivY){
-    
-    C <- Call(Spot, Strike, Sys.Date(), Maturity, Vol, Rate, DivY)
-    P <- Put(Spot, Strike, Sys.Date(), Maturity, Vol, Rate, DivY)
-    
-    output <- t(rbind(C, P))
-    return(output)
-}
