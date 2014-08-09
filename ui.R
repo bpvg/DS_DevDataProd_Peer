@@ -26,11 +26,34 @@ shinyUI(
                 
                 # Pricer Inputs
                 sidebarPanel(
-                    h4("Inputs")
+                    width = 2, 
+                    h4("Inputs"), 
+                    sliderInput("inPrice", 
+                                "Spot price: ",
+                                value=200, min=0.00, max=1000, step=1),
+                    sliderInput("inStrike", 
+                                "Strike price: ",
+                                value=200, min=0.00, max=1000, step=1),
+                    sliderInput("inIntRate", 
+                                "Interest Rate: ",
+                                value=0.02, min=-0.02, max=0.20, step=0.001, 
+                                format="0.####%"),
+                    sliderInput("inDivY", 
+                                "Dividend Yield: ",
+                                value=0.03, min=0.00, max=0.20, step=0.005, 
+                                format="0.####%"),
+                    sliderInput("inVolat", 
+                                "Volatility: ",
+                                value=0.2, min=0.00, max=1, step=0.001, 
+                                format="0.####%"),                
+                    dateInput("inMaturity",
+                              "Maturity date: ",
+                              value=Sys.Date()+60, min=Sys.Date()+1)
                 ),
             
                 # Pricer Outputs
                 mainPanel(
+                    br(), 
                     h4("Pricing Results")
                 )
             )
