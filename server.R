@@ -7,5 +7,12 @@ source("BlackScholes.R")
 shinyServer(
     function(input, output) {
         
+        output$outTable <- renderTable({Calculator(input$inPrice, 
+                                                   input$inStrike,
+                                                   input$inMaturity,
+                                                   input$inVolat,
+                                                   input$inIntRate,
+                                                   input$inDivY)})
+        
     }
 )

@@ -54,7 +54,8 @@ shinyUI(
                 # Pricer Outputs
                 mainPanel(
                     br(), 
-                    h4("Pricing Results")
+                    h4("Pricing Results"),
+                    tableOutput("outTable")
                 )
             )
         )
