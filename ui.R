@@ -64,7 +64,8 @@ shinyUI(
                     tabsetPanel(
                         tabPanel("Pricing Results", 
                             #h5("Pricing Results"), 
-                            tableOutput("outTable")
+                            column(3, tableOutput("outTable")),
+                            column(9, includeMarkdown("Q3.md"))
                         ),                    
                         tabPanel("Chart",
                             #h5("Chart"),
