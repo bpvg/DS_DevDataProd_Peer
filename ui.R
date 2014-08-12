@@ -1,6 +1,7 @@
 # Initialize User Interface Code
 library(shiny)
 library(markdown)
+library(rCharts)
 
 # Creating page layout
 shinyUI( 
@@ -15,7 +16,12 @@ shinyUI(
         # Homepage
         tabPanel(
             "Home",
-            includeMarkdown("Readme.md")
+            includeMarkdown("Readme.md"), 
+            fluidRow(
+                column(4, includeMarkdown("Q1.md")),
+                column(4, includeMarkdown("Q2.md")),
+                column(4, includeMarkdown("References.md"))
+            )
         ),
                
         
@@ -26,7 +32,7 @@ shinyUI(
                 
                 # Pricer Inputs
                 sidebarPanel(
-                    width = 2, 
+                    width = 3, 
                     h4("Inputs"), 
                     numericInput("inPrice", 
                                  "Spot price: ",
@@ -52,10 +58,35 @@ shinyUI(
                 ),
             
                 # Pricer Outputs
+                
                 mainPanel(
-                    br(), 
-                    h4("Pricing Results"),
-                    tableOutput("outTable")
+                    
+                    tabsetPanel(
+                        tabPanel("Pricing Results", 
+                            #h5("Pricing Results"), 
+                            tableOutput("outTable")
+                        ),                    
+                        tabPanel("Chart",
+                            #h5("Chart"),
+                            plotOutput("outChart"), #, "polycharts"),
+                            fluidRow(
+                                column(4, selectInput("inOrd", 
+                                                      "X-Axis",
+                                                      c("Spot", "Stike"),
+                                                      "Spot")), 
+                                column(4, selectInput("inAbs", 
+                                                      "Y-Axis",
+                                                      c("premium", "delta"),
+                                                      "premium")),
+                                    
+                                column(4, radioButtons("inType", 
+                                                       "Type",
+                                                       c("Call", "Put"),
+                                                       "Call",
+                                                       inline=TRUE))
+                            )
+                        )
+                    )
                 )
             )
         )

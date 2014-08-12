@@ -27,8 +27,8 @@ Charter <- function(xvar, yvar, cp, Spot, Strike, Maturity, Vol, Rate, DivY){
         }        
     } 
     
-    p <- xPlot(df$premium ~ v, type="line-dotted")
-    p$addParams(dom = 'outChart')
+    p <- plot(v, df$premium, type="line")
+    #p$addParams(dom = 'outChart')
     return(p)
 }
 
@@ -43,7 +43,7 @@ shinyServer(
                                                    input$inIntRate,
                                                    input$inDivY)},digits=4)
 
-        output$outChart <- renderChart({Charter(input$inOrd, 
+        output$outChart <- renderPlot({Charter(input$inOrd, 
                                                input$inAbs, 
                                                input$inType, 
                                                input$inPrice, 
