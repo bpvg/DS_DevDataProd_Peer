@@ -49,8 +49,8 @@ Call <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                             gamma   = gam,
                             theta   = the,
                             vega    = veg,
-                            rho     = rh), 
-                       row.names = "CALL")
+                            rho     = rh) 
+                       )
     return(r)
 }
 
@@ -77,7 +77,7 @@ Put <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                             gamma   = gam,
                             theta   = the,
                             vega    = veg,
-                            rho     = rh), 
-                       row.names = "PUT")
+                            rho     = rh)
+                       )
     return(r)
 }
