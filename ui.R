@@ -39,6 +39,9 @@ shinyUI(
                     numericInput("inStrike", 
                                  "Strike price: ",
                                  value=200, min=0.00, max=1000, step=1),
+                    dateInput("inMaturity",
+                              "Maturity date: ",
+                              value=Sys.Date()+60, min=Sys.Date()+1), 
                     sliderInput("inIntRate", 
                                 "Interest Rate: ",
                                 value=0.02, min=-0.02, max=0.20, step=0.0025, 
@@ -50,10 +53,7 @@ shinyUI(
                     sliderInput("inVolat", 
                                 "Volatility: ",
                                 value=0.2, min=0.00, max=1, step=0.001, 
-                                format="0.####%"),                
-                    dateInput("inMaturity",
-                              "Maturity date: ",
-                              value=Sys.Date()+60, min=Sys.Date()+1)
+                                format="0.####%")
                 ),
             
                 # Pricer Outputs
