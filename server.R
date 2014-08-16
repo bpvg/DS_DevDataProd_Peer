@@ -2,6 +2,7 @@
 library(shiny)
 library(rCharts)
 source("BlackScholes.R")
+options(RCHART_WIDTH = 800)
 
 # Output table constructor function
 Calculator <- function(Spot, Strike, Maturity, Vol, Rate, DivY){
@@ -25,11 +26,17 @@ Charter <- function(xvar, yvar, cp, Spot, Strike, Maturity, Vol, Rate, DivY){
         } else {
             df <- Put(v, Strike, Sys.Date(), Maturity, Vol, Rate, DivY)
         }        
+    }
+    if(xvar=="Strike"){
+        v <- Strike * mult
+        if(cp=="Call"){
+            df <- Call(Spot, v, Sys.Date(), Maturity, Vol, Rate, DivY)
+        } else {
+            df <- Put(Spot, v, Sys.Date(), Maturity, Vol, Rate, DivY)
+        }        
     } 
-    
-    p <- plot(v, df$premium, type="line")
-    #p$addParams(dom = 'outChart')
-    return(p)
+    df$X <- v
+    return(df)
 }
 
 # Server Function
@@ -43,14 +50,15 @@ shinyServer(
                                                    input$inIntRate,
                                                    input$inDivY)},digits=4)
 
-        output$outChart <- renderPlot({Charter(input$inOrd, 
-                                               input$inAbs, 
-                                               input$inType, 
-                                               input$inPrice, 
-                                               input$inStrike,
-                                               input$inMaturity,
-                                               input$inVolat,
-                                               input$inIntRate,
-                                               input$inDivY)})
+        output$outChart <- renderChart({
+            dataF <- Charter(input$inX, input$inY, input$inType, 
+                             input$inPrice, input$inStrike, input$inMaturity,
+                             input$inVolat, input$inIntRate, input$inDivY)
+            c <- rPlot(premium ~ X, type="line", data= dataF)
+            c$guides(x = list(title = input$inX))
+            c$guides(y = list(title = input$inY))
+            c$addParams(height = 290, dom = 'outChart')
+            return(c)
+        })
     }
 )

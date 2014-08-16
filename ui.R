@@ -2,6 +2,7 @@
 library(shiny)
 library(markdown)
 library(rCharts)
+options(RCHART_LIB = 'polycharts')
 
 # Creating page layout
 shinyUI( 
@@ -68,14 +69,12 @@ shinyUI(
                             column(9, includeMarkdown("Q3.md"))
                         ),                    
                         tabPanel("Chart",
-                            #h5("Chart"),
-                            plotOutput("outChart"), #, "polycharts"),
                             fluidRow(
-                                column(4, selectInput("inOrd", 
+                                column(4, selectInput("inX", 
                                                       "X-Axis",
                                                       c("Spot", "Stike"),
                                                       "Spot")), 
-                                column(4, selectInput("inAbs", 
+                                column(4, selectInput("inY", 
                                                       "Y-Axis",
                                                       c("premium", "delta"),
                                                       "premium")),
@@ -85,7 +84,8 @@ shinyUI(
                                                        c("Call", "Put"),
                                                        "Call",
                                                        inline=TRUE))
-                            )
+                            ),
+                            showOutput("outChart", "polycharts")
                         )
                     )
                 )
