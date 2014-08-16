@@ -1,8 +1,6 @@
 # Initialize User Interface Code
 library(shiny)
 library(markdown)
-library(rCharts)
-options(RCHART_LIB = 'polycharts')
 
 # Creating page layout
 shinyUI( 
@@ -72,20 +70,20 @@ shinyUI(
                             fluidRow(
                                 column(4, selectInput("inX", 
                                                       "X-Axis",
-                                                      c("Spot", "Stike"),
+                                                      c("Spot", "Strike", "Volatility"),
                                                       "Spot")), 
                                 column(4, selectInput("inY", 
                                                       "Y-Axis",
-                                                      c("premium", "delta"),
-                                                      "premium")),
-                                    
+                                                      c("premium", "delta", "gamma", 
+                                                        "theta", "vega", "rho"),
+                                                      "premium")),    
                                 column(4, radioButtons("inType", 
                                                        "Type",
                                                        c("Call", "Put"),
                                                        "Call",
                                                        inline=TRUE))
                             ),
-                            showOutput("outChart", "polycharts")
+                            plotOutput("outChart")
                         )
                     )
                 )
