@@ -1,0 +1,70 @@
+YAOOP!
+========================================================
+_Yet Another Online Options Pricer_  
+
+<br><br><br><br><br><br>
+**author:** bpvg  
+**date:** `r Sys.Date()`  
+<br>
+<small>**alpha site:** http://bpvg.shinyapps.io/YAOOP</small>  
+
+
+The YAOOP! project 
+========================================================
+<br>
+**Our vision:** 
+_Finance shall be easy._  
+
+**Our mission:**
+_Provide a simple and intuitive, yet powerful, European Options Pricer._  
+
+<br><br>
+Why _YAOOP!_?
+- Simple and intuitive to use.
+- Well documented and with lots of learning resources.
+- Powerful graphical what-if analysis.
+
+
+Our Site
+========================================================
+You can find us at:  
+http://bpvg.shinyapps.io/YAOOP
+
+
+
+
+<small>We're strongly committed to open-source. You can find the source code for our site and for this presentation on [GitHub] (https://github.com/bpvg/DS_DevDataProd_Peer).</small>
+
+Maths behind the site
+========================================================
+<small>We use an enhanced Black-Scholes formula, able to deal with continuous dividend payment.  </small>  
+
+```{r PricingDemo, echo=TRUE}
+source("server.R")
+Calculator(20, 18, "2014-12-19", 0.25, 0.005, 0)
+
+```
+
+Graphical what-if analysis
+========================================================
+
+Powerful graphical analysis showing the behavior of an outputs when an input changes. 
+
+```{r ChartDemo1, echo=FALSE}
+library(ggplot2)
+data <- Charter("Spot", "premium", "Call", 20, 18, "2015-12-18", 0.25, 0.005, 0)
+p <- ggplot(data, aes(x=X, y=Y)) + geom_line(col="#802c59", size=2)
+p <- p + xlab("Spot") + ylab("premium") + theme_bw()
+print(p)
+```
+
+***
+<br>
+```{r ChartDemo2, echo=FALSE}
+data <- Charter("Spot", "delta", "Put", 20, 18, "2015-12-18", 0.25, 0.005, 0)
+p <- ggplot(data, aes(x=X, y=Y)) + geom_line(col="#802c59", size=2)
+p <- p + xlab("Spot") + ylab("delta") + theme_bw()
+print(p)
+```
+
+ 
