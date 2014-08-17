@@ -3,10 +3,10 @@ YAOOP!
 _Yet Another Online Options Pricer_  
 
 <br><br><br><br><br><br>
-**author:** bpvg  
-**date:** `r Sys.Date()`  
+_author:_ bpvg  
+_date:_ `r Sys.Date()`  
 <br>
-<small>**alpha site:** http://bpvg.shinyapps.io/YAOOP</small>  
+<small>_alpha site:_ http://bpvg.shinyapps.io/YAOOP</small>  
 
 
 The YAOOP! project 
