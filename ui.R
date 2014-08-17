@@ -32,7 +32,7 @@ shinyUI(
                 # Pricer Inputs
                 sidebarPanel(
                     width = 3, 
-                    h4("Inputs"), 
+                    h4("Black-Sholes Inputs"), 
                     numericInput("inPrice", 
                                  "Spot price: ",
                                  value=200, min=0.00, max=1000, step=1),
@@ -66,7 +66,7 @@ shinyUI(
                             column(3, tableOutput("outTable")),
                             column(9, includeMarkdown("Q3.md"))
                         ),                    
-                        tabPanel("Chart",
+                        tabPanel("Simulation Chart",
                             fluidRow(
                                 column(4, selectInput("inX", 
                                                       "X-Axis",
