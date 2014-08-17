@@ -60,7 +60,7 @@ shinyServer(
                                                    input$inMaturity,
                                                    input$inVolat,
                                                    input$inIntRate,
-                                                   input$inDivY)},digits=4)
+                                                   input$inDivY)},digits=3)
 
         output$outChart <- renderPlot({
             df <- Charter(input$inX, input$inY, input$inType, 

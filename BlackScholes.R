@@ -35,6 +35,8 @@ Call <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
     
     #computing premium and major greeks
     pre <- exp(-Rate*T2M) * (f * pnorm(d_1) - Strike * pnorm(d_2))
+    int <- ifelse(Spot>Strike, Spot-Strike, 0)
+    tmp <- pre-int
     del <- pnorm(d_1) * exp(-DivY*T2M)
     gam <- exp(-DivY*T2M) * dnorm(d_1) / (Spot * Vol * sqrt(T2M))
     the <- (-exp(-DivY*T2M) * (Spot * dnorm(d_1) * Vol) / (2 * sqrt(T2M)) - 
@@ -44,12 +46,14 @@ Call <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
     rh  <- (Strike * T2M * exp(-Rate*T2M) * pnorm(d_2)) / 100    #%
     
     # returning results as a list
-    r <- as.data.frame(list(premium = pre,
-                            delta   = del,
-                            gamma   = gam,
-                            theta   = the,
-                            vega    = veg,
-                            rho     = rh) 
+    r <- as.data.frame(list(premium   = pre,
+                            intrinsic = int,
+                            temporal  = tmp,
+                            delta     = del,
+                            gamma     = gam,
+                            theta     = the,
+                            vega      = veg,
+                            rho       = rh) 
                        )
     return(r)
 }
@@ -63,6 +67,8 @@ Put <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
     
     #computing premium and major greeks
     pre <- exp(-Rate*T2M) * (-f * pnorm(-d_1) + Strike * pnorm(-d_2))
+    int <- ifelse(Spot>Strike, 0, Strike-Spot)
+    tmp <- pre-int
     del <- -pnorm(-d_1) * exp(-DivY*T2M)
     gam <- exp(-DivY*T2M) * dnorm(d_1) / (Spot * Vol * sqrt(T2M))
     the <- (-exp(-DivY*T2M) * (Spot * dnorm(d_1) * Vol) / (2 * sqrt(T2M)) + 
@@ -72,12 +78,14 @@ Put <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
     rh  <- -(Strike * T2M * exp(-Rate*T2M) * pnorm(-d_2)) / 100    #%
     
     # returning results as a list
-    r <- as.data.frame(list(premium = pre,
-                            delta   = del,
-                            gamma   = gam,
-                            theta   = the,
-                            vega    = veg,
-                            rho     = rh)
-                       )
+    r <- as.data.frame(list(premium   = pre,
+                            intrinsic = int,
+                            temporal  = tmp,
+                            delta     = del,
+                            gamma     = gam,
+                            theta     = the,
+                            vega      = veg,
+                            rho       = rh) 
+    )
     return(r)
 }
