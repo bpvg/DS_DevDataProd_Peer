@@ -18,11 +18,12 @@ _Finance shall be easy._
 **Our mission:**
 _Provide a simple and intuitive, yet powerful, European Options Pricer._  
 
-<br><br>
-Why _YAOOP!_?
+<br>
+**Why _YAOOP!_?**  
 - Simple and intuitive to use.
 - Well documented and with lots of learning resources.
 - Powerful graphical what-if analysis.
+- Multiplatform.
 
 
 Our Site
@@ -30,10 +31,18 @@ Our Site
 You can find us at:  
 http://bpvg.shinyapps.io/YAOOP
 
+![YAOOP Platforms] (Platforms.gif)
 
+<br><br><small>
+The source code for the site and for this presentation is on [GitHub] (https://github.com/bpvg/DS_DevDataProd_Peer).  
+</small>
 
+***
+<br><br><br>
+## YAOOP! is with you...
+<br>
+## ...wherever you are!
 
-<small>We're strongly committed to open-source. You can find the source code for our site and for this presentation on [GitHub] (https://github.com/bpvg/DS_DevDataProd_Peer).</small>
 
 Maths behind the site
 ========================================================
@@ -48,7 +57,7 @@ Calculator(20, 18, "2014-12-19", 0.25, 0.005, 0)
 Graphical what-if analysis
 ========================================================
 
-Powerful graphical analysis showing the behavior of an outputs when an input changes. 
+Powerful graphical analysis.
 
 ```{r ChartDemo1, echo=FALSE}
 library(ggplot2)
@@ -59,12 +68,11 @@ print(p)
 ```
 
 ***
-<br>
 ```{r ChartDemo2, echo=FALSE}
-data <- Charter("Spot", "delta", "Put", 20, 18, "2015-12-18", 0.25, 0.005, 0)
+data <- Charter("Strike", "delta", "Put", 20, 18, "2015-12-18", 0.25, 0.005, 0)
 p <- ggplot(data, aes(x=X, y=Y)) + geom_line(col="#802c59", size=2)
-p <- p + xlab("Spot") + ylab("delta") + theme_bw()
+p <- p + xlab("Strike") + ylab("delta") + theme_bw()
 print(p)
 ```
-
+You can simulate the behavior of an output when an input changes. 
  
