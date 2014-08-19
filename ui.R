@@ -70,7 +70,9 @@ shinyUI(
                             fluidRow(
                                 column(4, selectInput("inX", 
                                                       "X-Axis",
-                                                      c("Spot", "Strike", "Volatility"),
+                                                      c("Spot", "Strike",  
+                                                        "Interest Rate", "Dividend Yield", 
+                                                        "Volatility"),
                                                       "Spot")), 
                                 column(4, selectInput("inY", 
                                                       "Y-Axis",
