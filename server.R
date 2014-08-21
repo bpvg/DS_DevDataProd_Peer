@@ -34,6 +34,14 @@ Charter <- function(xvar, yvar, cp, Spot, Strike, Maturity, Vol, Rate, DivY){
             df <- Put(Spot, v, Sys.Date(), Maturity, Vol, Rate, DivY)
         } 
     }
+    if(xvar=="Maturity"){
+        v <- seq(Sys.Date()+1, Maturity, length.out=50)
+        if(cp=="Call"){
+            df <- Call(Spot, Strike, Sys.Date(), v, Vol, Rate, DivY)
+        } else {
+            df <- Put(Spot, Strike, Sys.Date(), v, Vol, Rate, DivY)
+        } 
+    }
     if(xvar=="Volatility"){
         v <- Vol * mult
         if(cp=="Call"){
