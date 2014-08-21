@@ -52,7 +52,7 @@ shinyUI(
                                 format="0.####%"),
                     sliderInput("inVolat", 
                                 "Volatility: ",
-                                value=0.2, min=0.00, max=1, step=0.001, 
+                                value=0.2, min=0.00, max=1, step=0.0025, 
                                 format="0.####%")
                 ),
             
@@ -63,7 +63,7 @@ shinyUI(
                     tabsetPanel(
                         tabPanel("Pricing Results", 
                             #h5("Pricing Results"), 
-                            column(3, tableOutput("outTable")),
+                            column(3, br(), tableOutput("outTable")),
                             column(9, includeMarkdown("Q3.md"))
                         ),                    
                         tabPanel("Simulation Chart",
@@ -78,7 +78,8 @@ shinyUI(
                                                       "Y-Axis",
                                                       c("premium", "intrinsic", 
                                                         "temporal", "delta", "gamma", 
-                                                        "theta", "vega", "rho"),
+                                                        "theta", "vega", "vanna", 
+                                                        "vomma", "rho"),
                                                       "premium")),    
                                 column(4, radioButtons("inType", 
                                                        "Type",

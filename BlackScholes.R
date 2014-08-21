@@ -42,7 +42,9 @@ Call <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                 Rate * Strike * exp(-Rate*T2M) * pnorm(d_2) + 
                 DivY * Spot * exp(-DivY*T2M) * pnorm(d_1)) / 365   #daily theta
     veg <- (Spot * exp(-DivY*T2M) * dnorm(d_1) * sqrt(T2M)) / 100  #%
-    rh  <- (Strike * T2M * exp(-Rate*T2M) * pnorm(d_2)) / 100    #%
+    rh  <- (Strike * T2M * exp(-Rate*T2M) * pnorm(d_2)) / 100      #%
+    van <- (-exp(-DivY*T2M) * dnorm(d_1) * d_2 / Vol) / 100        #%
+    vom <- (veg * (d_1 * d_2) / Vol) / 100
     
     # returning results as a list
     r <- as.data.frame(list(premium   = pre,
@@ -52,6 +54,8 @@ Call <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                             gamma     = gam,
                             theta     = the,
                             vega      = veg,
+                            vanna     = van,
+                            vomma     = vom,
                             rho       = rh) 
                        )
     return(r)
@@ -75,6 +79,8 @@ Put <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                 DivY * Spot * exp(-DivY*T2M) * pnorm(-d_1)) / 365   #daily theta
     veg <- (Spot * exp(-DivY*T2M) * dnorm(d_1) * sqrt(T2M)) / 100  #%
     rh  <- -(Strike * T2M * exp(-Rate*T2M) * pnorm(-d_2)) / 100    #%
+    van <- (-exp(-DivY*T2M) * dnorm(d_1) * d_2 / Vol) / 100        #%
+    vom <- (veg * (d_1 * d_2) / Vol) / 100
     
     # returning results as a list
     r <- as.data.frame(list(premium   = pre,
@@ -84,6 +90,8 @@ Put <- function(Spot, Strike, Today, Maturity, Vol, Rate, DivY){
                             gamma     = gam,
                             theta     = the,
                             vega      = veg,
+                            vanna     = van,
+                            vomma     = vom,
                             rho       = rh) 
     )
     return(r)
