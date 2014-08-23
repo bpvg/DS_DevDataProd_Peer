@@ -23,6 +23,12 @@ shinyUI(
             )
         ),
                
+        #Tutorial
+        tabPanel(
+            "Tutorial",
+            includeMarkdown("Tutorial.md")
+        
+        ),
         
         # Pricer
         tabPanel(
