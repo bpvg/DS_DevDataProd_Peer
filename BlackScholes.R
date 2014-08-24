@@ -3,15 +3,21 @@
 #################################
 
 
-# Returns the number of years between two dates
-# I assumed Act/365 day count fraction
+#' Returns the number of years between two dates
+#' 
+#' @param Tdy, is the first date you're using (you can use a single date or a vector)
+#' @param Dt, is the second date you're using (you can use a single date or a vector)
+#' @return The number of years between the two dates.
+#' @details Act/365 day count fraction is assumed
+#' 
 time2expiry <- function(Tdy, Dt){
     dif <- as.numeric(as.Date(Dt)-as.Date(Tdy))
     return(dif/365) 
 }
 
-# Returns the forward price of an asset given the spot price, interest rate, 
-# dividend yield and time until maturity
+#' Returns the forward price of an asset given the spot price, interest rate, 
+#' dividend yield and time until maturity
+#' 
 Fwd <- function(S, Rt, DY, Tm){
     return( S * exp((Rt-DY)*Tm) )
 }
